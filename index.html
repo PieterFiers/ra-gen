@@ -7,8 +7,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="RA.gen">
 <meta name="theme-color" content="#0d1117">
-<link rel="manifest" href="/manifest.json">
-<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="/ra-gen/manifest.json">
+<link rel="apple-touch-icon" href="/ra-gen/icon-192.png">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <title>RA.gen</title>
 <style>
@@ -28,12 +28,10 @@
 }
 html,body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:15px;line-height:1.5;height:100%;-webkit-font-smoothing:antialiased;overflow:hidden}
 
-/* SCREENS */
 .screen{position:fixed;inset:0;display:flex;flex-direction:column;background:var(--bg);transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);will-change:transform;overflow:hidden}
 .screen.active{transform:translateX(0)}
 .screen.behind{transform:translateX(-30%)}
 
-/* TOPBAR */
 .topbar{background:var(--ink);padding:calc(var(--safe-top) + 12px) 16px 12px;display:flex;align-items:center;gap:12px;flex-shrink:0;min-height:56px}
 .topbar-back{width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.1);border:none;border-radius:8px;color:#fff;font-size:20px;cursor:pointer;flex-shrink:0}
 .topbar-back:active{background:rgba(255,255,255,.2)}
@@ -43,24 +41,19 @@ html,body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-siz
 .logo-mark{font-family:var(--mono);font-size:15px;font-weight:600;color:#fff;letter-spacing:.1em}
 .logo-mark em{color:#4d7fff;font-style:normal}
 
-/* SCROLLABLE CONTENT */
 .content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 14px calc(var(--safe-bot) + 80px)}
-
-/* STICKY BOTTOM BAR */
 .bottom-bar{position:absolute;bottom:0;left:0;right:0;padding:10px 14px calc(var(--safe-bot) + 10px);background:linear-gradient(to top, var(--bg) 70%, transparent);flex-shrink:0}
 
-/* HOME SCREEN */
+/* HOME */
 .home-hero{background:var(--ink);border-radius:var(--r2);padding:20px;margin-bottom:14px;position:relative;overflow:hidden}
 .home-hero::after{content:'';position:absolute;right:-20px;top:-20px;width:120px;height:120px;background:radial-gradient(circle, rgba(77,127,255,.3) 0%, transparent 70%);pointer-events:none}
 .hero-label{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.4);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
 .hero-title{font-family:var(--mono);font-size:22px;font-weight:600;color:#fff;letter-spacing:.05em;margin-bottom:4px}
 .hero-title em{color:#4d7fff;font-style:normal}
 .hero-sub{font-size:13px;color:rgba(255,255,255,.5);line-height:1.5}
-
 .section-label{font-family:var(--mono);font-size:10px;font-weight:600;color:var(--ink3);letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px;padding-left:2px}
 
-/* PROJECT CARDS */
-.project-card{background:var(--card);border-radius:var(--r2);border:1px solid var(--border);padding:15px 16px;margin-bottom:10px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:border-color .15s}
+.project-card{background:var(--card);border-radius:var(--r2);border:1px solid var(--border);padding:15px 16px;margin-bottom:10px;display:flex;align-items:center;gap:14px;cursor:pointer}
 .project-card:active{background:#f5f7ff;border-color:var(--accent)}
 .project-icon{width:42px;height:42px;border-radius:10px;background:var(--accent-s);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:14px;font-weight:600;color:var(--accent);flex-shrink:0}
 .project-info{flex:1;min-width:0}
@@ -68,12 +61,11 @@ html,body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-siz
 .project-meta{font-size:12px;color:var(--ink3);margin-top:2px;font-family:var(--mono)}
 .project-arrow{color:var(--ink4);font-size:18px;flex-shrink:0}
 .project-count{font-family:var(--mono);font-size:10px;font-weight:600;background:var(--ok-s);color:var(--ok);padding:2px 7px;border-radius:4px}
-
 .empty-state{text-align:center;padding:40px 20px;color:var(--ink3)}
 .empty-icon{font-size:40px;margin-bottom:12px;opacity:.35}
 .empty-text{font-size:14px;line-height:1.6}
 
-/* NEW PROJECT MODAL */
+/* MODAL */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;display:flex;align-items:flex-end;opacity:0;pointer-events:none;transition:opacity .25s}
 .modal-overlay.open{opacity:1;pointer-events:all}
 .modal-sheet{background:var(--card);border-radius:20px 20px 0 0;padding:20px 18px calc(var(--safe-bot) + 20px);width:100%;transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1)}
@@ -81,7 +73,7 @@ html,body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-siz
 .modal-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 18px}
 .modal-title{font-size:18px;font-weight:600;color:var(--ink);margin-bottom:16px}
 
-/* CARDS & FIELDS */
+/* CARDS */
 .card{background:var(--card);border-radius:var(--r2);border:1px solid var(--border);margin-bottom:12px;overflow:hidden}
 .card-header{display:flex;align-items:center;justify-content:space-between;padding:13px 15px;cursor:pointer;-webkit-user-select:none}
 .card-header:active{background:#fafafa}
@@ -102,7 +94,7 @@ textarea{resize:none;line-height:1.6}
 select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:36px}
 
 /* GEVAAR ITEMS */
-.gev-item{background:#fafbff;border:1.5px solid var(--border);border-radius:var(--r);padding:12px;margin-bottom:9px;position:relative}
+.gev-item{background:#fafbff;border:1.5px solid var(--border);border-radius:var(--r);padding:12px;margin-bottom:9px}
 .gev-item:last-of-type{margin-bottom:0}
 .gev-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .gev-nr{font-family:var(--mono);font-size:10px;font-weight:600;color:var(--accent);background:var(--accent-s);padding:2px 8px;border-radius:4px}
@@ -111,10 +103,21 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 .gev-item .field{margin-bottom:8px}
 .gev-item .field:last-child{margin-bottom:0}
 
+/* FOTO UPLOAD */
+.foto-upload-zone{border:1.5px dashed var(--border);border-radius:var(--r);padding:10px 12px;display:flex;align-items:center;gap:10px;cursor:pointer;background:#fff;position:relative;overflow:hidden}
+.foto-upload-zone:active{border-color:var(--accent);background:var(--accent-s)}
+.foto-upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;font-size:0}
+.foto-upload-icon{width:32px;height:32px;border-radius:7px;background:var(--accent-s);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.foto-upload-text{font-size:13px;color:var(--ink3);line-height:1.3}
+.foto-upload-text strong{display:block;font-size:12px;color:var(--ink2);font-weight:600}
+.foto-preview-row{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+.foto-thumb{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1.5px solid var(--border);cursor:pointer;position:relative}
+.foto-thumb-wrap{position:relative;width:64px;height:64px}
+.foto-thumb-del{position:absolute;top:-5px;right:-5px;width:18px;height:18px;background:var(--err);border-radius:50%;border:none;color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2;line-height:1}
+
 /* BUTTONS */
 .btn-add{width:100%;display:flex;align-items:center;justify-content:center;gap:7px;font-size:14px;font-weight:500;color:var(--accent);background:var(--accent-s);border:1.5px dashed var(--accent);border-radius:var(--r);padding:11px;cursor:pointer;margin-top:10px}
 .btn-add:active{background:var(--accent);color:#fff}
-
 .btn-primary{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#fff;background:var(--accent);border:none;border-radius:var(--r2);padding:16px;cursor:pointer;box-shadow:0 4px 20px rgba(26,60,255,.3)}
 .btn-primary:active:not(:disabled){background:var(--accent-d);box-shadow:none}
 .btn-primary:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
@@ -123,7 +126,6 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 .spinner{width:16px;height:16px;border:2.5px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* STATUS */
 .status{display:flex;align-items:flex-start;gap:9px;padding:11px 13px;border-radius:var(--r);font-size:13px;margin:10px 0;line-height:1.5}
 .status.info{background:var(--accent-s);color:var(--accent-d)}
 .status.ok{background:var(--ok-s);color:#065f46}
@@ -147,12 +149,21 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 .sl{font-family:var(--mono);font-size:10px;font-weight:600;color:var(--ink3);letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px;margin-top:10px}
 .sl:first-of-type{margin-top:0}
 .ra-text{font-size:13px;color:var(--ink2);line-height:1.6}
-.scores{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:4px}
-.sb{background:var(--bg);border-radius:7px;padding:8px 4px;text-align:center;border:1px solid var(--border2)}
-.sb .v{font-family:var(--mono);font-size:15px;font-weight:600;color:var(--ink);line-height:1}
-.sb .l{font-size:9px;color:var(--ink3);margin-top:3px;font-family:var(--mono)}
-.scores.after .sb{background:var(--ok-s)}
-.scores.after .sb .v{color:#065f46}
+
+/* BEWERKBARE SCORES */
+.scores-edit{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:4px}
+.score-edit-box{background:var(--bg);border-radius:7px;padding:6px 4px;text-align:center;border:1.5px solid var(--border2);position:relative}
+.score-edit-box.r-box{background:#fde8e8;border-color:#fca5a5}
+.score-edit-box.r-box .sv{color:#b91c1c}
+.score-edit-box input{width:100%;background:transparent;border:none;font-family:var(--mono);font-size:15px;font-weight:600;color:var(--ink);text-align:center;padding:2px 0;outline:none;-webkit-appearance:none}
+.score-edit-box input:focus{color:var(--accent)}
+.score-edit-box .sl2{font-size:9px;color:var(--ink3);margin-top:2px;font-family:var(--mono);display:block}
+.scores-edit.after .score-edit-box{background:var(--ok-s);border-color:#6ee7b7}
+.scores-edit.after .score-edit-box input{color:#065f46}
+.scores-edit.after .score-edit-box.r-box{background:var(--ok-s)}
+.scores-edit.after .score-edit-box.r-box .sv{color:#065f46}
+.r-display{font-family:var(--mono);font-size:15px;font-weight:700;display:block;padding:4px 0}
+
 .exp-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:6px;font-size:12px;font-family:var(--mono);color:var(--ink3);background:none;border:none;border-top:1px solid var(--border2);padding:10px;cursor:pointer;letter-spacing:.03em}
 .exp-btn:active{background:#f9fafb}
 .exp-content{padding:0 14px 13px;display:none}
@@ -162,7 +173,10 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 .rr-tag.j{background:var(--warn-s);color:#92400e}
 .plr-tag{display:inline-block;font-family:var(--mono);font-size:12px;font-weight:600;padding:4px 10px;border-radius:6px;background:var(--accent-s);color:var(--accent);margin-top:4px}
 
-/* RESULT HEADER */
+/* FOTO IN RESULTAAT */
+.foto-result-row{display:flex;gap:7px;flex-wrap:wrap;margin-top:6px}
+.foto-result-img{width:80px;height:80px;border-radius:8px;object-fit:cover;border:1.5px solid var(--border);cursor:pointer}
+
 .result-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px}
 .result-hdr-title{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--ink2);letter-spacing:.06em;text-transform:uppercase}
 .pills{display:flex;gap:5px;flex-wrap:wrap}
@@ -171,7 +185,6 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 .pill.m{background:var(--warn-s);color:#92400e}
 .pill.l{background:var(--ok-s);color:#065f46}
 .pill.a{background:#e0f2fe;color:#0369a1}
-
 .export-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
 .btn-exp{display:flex;align-items:center;justify-content:center;gap:6px;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;color:var(--ink2);background:var(--card);border:1.5px solid var(--border);border-radius:var(--r);padding:11px 8px;cursor:pointer}
 .btn-exp:active{border-color:var(--accent);color:var(--accent)}
@@ -191,7 +204,6 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 .proj-hero-name{font-family:var(--mono);font-size:16px;font-weight:600;color:#fff;margin-bottom:4px}
 .proj-hero-meta{font-size:12px;color:rgba(255,255,255,.5)}
 .proj-hero-meta span{color:rgba(255,255,255,.7);font-weight:500}
-
 .ra-session-card{background:var(--card);border-radius:var(--r2);border:1px solid var(--border);padding:14px 15px;margin-bottom:10px;display:flex;align-items:center;gap:13px;cursor:pointer}
 .ra-session-card:active{background:#f5f7ff;border-color:var(--accent)}
 .ra-session-icon{width:38px;height:38px;border-radius:9px;background:var(--accent-s);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
@@ -199,14 +211,18 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 .ra-session-name{font-size:14px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ra-session-meta{font-size:11px;color:var(--ink3);margin-top:2px;font-family:var(--mono)}
 .ra-session-arrow{color:var(--ink4);font-size:18px}
-
-/* DIVIDER */
 .divider{height:1px;background:var(--border2);margin:14px 0}
+
+/* LIGHTBOX */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:200;display:flex;align-items:center;justify-content:center;display:none}
+.lightbox.open{display:flex}
+.lightbox img{max-width:95vw;max-height:90vh;border-radius:10px;object-fit:contain}
+.lightbox-close{position:absolute;top:16px;right:16px;width:36px;height:36px;background:rgba(255,255,255,.15);border:none;border-radius:50%;color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 </style>
 </head>
 <body>
 
-<!-- ═══ SCREEN: HOME ═══ -->
+<!-- HOME -->
 <div class="screen active" id="s-home">
   <div class="topbar">
     <div class="logo-mark">RA<em>.</em>gen</div>
@@ -224,12 +240,12 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
     <div class="divider"></div>
     <div class="section-label">Snel starten</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:14px;cursor:pointer" onclick="showScreen('s-new-ra',null,true)" class="quick-tile">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:14px;cursor:pointer" onclick="prepareNewRA(null);showScreen('s-new-ra')">
         <div style="font-size:22px;margin-bottom:8px">⚡</div>
         <div style="font-size:13px;font-weight:600;color:var(--ink)">Snelle RA</div>
         <div style="font-size:11px;color:var(--ink3);margin-top:2px">Zonder projectdossier</div>
       </div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:14px;cursor:pointer" onclick="openNewProject()" class="quick-tile">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:14px;cursor:pointer" onclick="openNewProject()">
         <div style="font-size:22px;margin-bottom:8px">📁</div>
         <div style="font-size:13px;font-weight:600;color:var(--ink)">Nieuw project</div>
         <div style="font-size:11px;color:var(--ink3);margin-top:2px">Klant + dossier</div>
@@ -241,7 +257,7 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
   </div>
 </div>
 
-<!-- ═══ SCREEN: PROJECT DETAIL ═══ -->
+<!-- PROJECT DETAIL -->
 <div class="screen" id="s-project">
   <div class="topbar">
     <button class="topbar-back" onclick="goBack()">‹</button>
@@ -262,14 +278,13 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
   </div>
 </div>
 
-<!-- ═══ SCREEN: NEW RA ═══ -->
+<!-- NEW RA -->
 <div class="screen" id="s-new-ra">
   <div class="topbar">
     <button class="topbar-back" onclick="goBack()">‹</button>
     <span class="topbar-title" id="newRATitle">Nieuwe RA</span>
   </div>
   <div class="content">
-
     <!-- CONFIG -->
     <div class="card">
       <div class="card-header" onclick="tog('cfg')">
@@ -308,7 +323,7 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
         <button class="btn-add" onclick="addGev()">+ Gevaar toevoegen</button>
         <div class="field" style="margin-top:13px">
           <label>Ruwe veldinput (Boomerang-notities)</label>
-          <textarea id="rawIn" rows="4" placeholder="Plak hier ongestructureerde notities van het terrein. De AI verwerkt dit automatisch.&#10;&#10;bv: ingaande nip band T01 zone A, geen afscherming&#10;noodstop palletizer oost ontbreekt"></textarea>
+          <textarea id="rawIn" rows="4" placeholder="Plak hier ongestructureerde notities van het terrein. De AI verwerkt dit automatisch."></textarea>
         </div>
       </div>
     </div>
@@ -374,7 +389,6 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
         </button>
       </div>
     </div>
-
   </div>
   <div class="bottom-bar">
     <button class="btn-primary" id="genBtn" onclick="generateRA()">
@@ -384,7 +398,7 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
   </div>
 </div>
 
-<!-- NEW PROJECT MODAL -->
+<!-- PROJECT MODAL -->
 <div class="modal-overlay" id="newProjModal" onclick="closeModalOutside(event)">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
@@ -399,86 +413,79 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
   </div>
 </div>
 
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">×</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
 <script>
-// ─── STATE ───
-let projects = JSON.parse(localStorage.getItem('ra_projects') || '[]');
+let projects = JSON.parse(localStorage.getItem('ra_projects')||'[]');
 let currentProject = null;
-let currentSession = null;
 let screenStack = ['s-home'];
 let gevRows = [], gevId = 0, raResults = [];
+// foto store: { gevId -> [base64, ...] }
+let gevFotos = {};
 
-function saveProjects() { localStorage.setItem('ra_projects', JSON.stringify(projects)); }
+function saveProjects(){ localStorage.setItem('ra_projects', JSON.stringify(projects)); }
 
-// ─── NAVIGATION ───
-function showScreen(id, project = null, noStack = false) {
-  const cur = screenStack[screenStack.length - 1];
+// ── NAVIGATIE ──
+function showScreen(id, noHistory){
+  const cur = screenStack[screenStack.length-1];
   document.getElementById(cur)?.classList.add('behind');
   document.getElementById(cur)?.classList.remove('active');
-  if (!noStack) screenStack.push(id);
-  else { screenStack = ['s-home', id]; }
+  if(!noHistory) screenStack.push(id);
   document.getElementById(id)?.classList.remove('behind');
   document.getElementById(id)?.classList.add('active');
-  if (project) { currentProject = project; renderProjectScreen(); }
 }
-
-function goBack() {
-  if (screenStack.length <= 1) return;
+function goBack(){
+  if(screenStack.length<=1) return;
   const cur = screenStack.pop();
-  const prev = screenStack[screenStack.length - 1];
+  const prev = screenStack[screenStack.length-1];
   const el = document.getElementById(cur);
-  el?.classList.remove('active');
-  el?.classList.remove('behind');
-  el?.style && (el.style.transform = '');
-  setTimeout(() => { el?.classList.remove('behind'); }, 350);
+  el?.classList.remove('active','behind');
   document.getElementById(prev)?.classList.remove('behind');
   document.getElementById(prev)?.classList.add('active');
-  if (prev === 's-home') renderHome();
+  if(prev==='s-home') renderHome();
 }
 
-// ─── HOME ───
-function renderHome() {
+// ── HOME ──
+function renderHome(){
   const list = document.getElementById('projectList');
-  if (!projects.length) {
-    list.innerHTML = `<div class="empty-state"><div class="empty-icon">📂</div><div class="empty-text">Nog geen projecten.<br>Maak een nieuw project aan om te starten.</div></div>`;
+  if(!projects.length){
+    list.innerHTML=`<div class="empty-state"><div class="empty-icon">📂</div><div class="empty-text">Nog geen projecten.<br>Maak een nieuw project aan om te starten.</div></div>`;
     return;
   }
-  list.innerHTML = projects.map(p => {
-    const initials = p.klant.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
-    const raCount = (p.sessions || []).length;
+  list.innerHTML = projects.map(p=>{
+    const ini = p.klant.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+    const cnt = (p.sessions||[]).length;
     return `<div class="project-card" onclick="openProject('${p.id}')">
-      <div class="project-icon">${initials}</div>
+      <div class="project-icon">${ini}</div>
       <div class="project-info">
         <div class="project-name">${p.klant}</div>
-        <div class="project-meta">${p.project || 'Geen projectnaam'}</div>
+        <div class="project-meta">${p.project||'Geen projectnaam'}</div>
       </div>
-      ${raCount ? `<span class="project-count">${raCount} RA</span>` : ''}
+      ${cnt?`<span class="project-count">${cnt} RA</span>`:''}
       <span class="project-arrow">›</span>
     </div>`;
   }).join('');
 }
 
-// ─── PROJECT MODAL ───
-function openNewProject() {
-  document.getElementById('np-klant').value = '';
-  document.getElementById('np-project').value = '';
-  document.getElementById('np-constructeur').value = '';
+// ── PROJECT ──
+function openNewProject(){
+  document.getElementById('np-klant').value='';
+  document.getElementById('np-project').value='';
+  document.getElementById('np-constructeur').value='';
   document.getElementById('newProjModal').classList.add('open');
-  setTimeout(() => document.getElementById('np-klant').focus(), 350);
+  setTimeout(()=>document.getElementById('np-klant').focus(),350);
 }
-function closeModal() { document.getElementById('newProjModal').classList.remove('open'); }
-function closeModalOutside(e) { if (e.target.id === 'newProjModal') closeModal(); }
+function closeModal(){ document.getElementById('newProjModal').classList.remove('open'); }
+function closeModalOutside(e){ if(e.target.id==='newProjModal') closeModal(); }
 
-function createProject() {
+function createProject(){
   const klant = document.getElementById('np-klant').value.trim();
-  if (!klant) { document.getElementById('np-klant').focus(); return; }
-  const p = {
-    id: 'p' + Date.now(),
-    klant,
-    project: document.getElementById('np-project').value.trim(),
-    constructeur: document.getElementById('np-constructeur').value.trim(),
-    created: new Date().toLocaleDateString('nl-BE'),
-    sessions: []
-  };
+  if(!klant){ document.getElementById('np-klant').focus(); return; }
+  const p = {id:'p'+Date.now(), klant, project:document.getElementById('np-project').value.trim(), constructeur:document.getElementById('np-constructeur').value.trim(), created:new Date().toLocaleDateString('nl-BE'), sessions:[]};
   projects.unshift(p);
   saveProjects();
   closeModal();
@@ -486,104 +493,86 @@ function createProject() {
   openProject(p.id);
 }
 
-// ─── PROJECT DETAIL ───
-function openProject(id) {
-  currentProject = projects.find(p => p.id === id);
-  if (!currentProject) return;
+function openProject(id){
+  currentProject = projects.find(p=>p.id===id);
+  if(!currentProject) return;
   renderProjectScreen();
-  showScreen('s-project', currentProject);
+  showScreen('s-project');
 }
 
-function renderProjectScreen() {
-  if (!currentProject) return;
+function renderProjectScreen(){
+  if(!currentProject) return;
   document.getElementById('projScreenTitle').textContent = currentProject.klant;
-  document.getElementById('projHero').innerHTML = `
+  document.getElementById('projHero').innerHTML=`
     <div class="proj-hero-name">${currentProject.klant}</div>
-    <div class="proj-hero-meta">${currentProject.project ? '<span>' + currentProject.project + '</span>' : ''}${currentProject.constructeur ? ' · ' + currentProject.constructeur : ''}</div>
-    <div class="proj-hero-meta" style="margin-top:4px">Aangemaakt: ${currentProject.created}</div>
-  `;
-  const sessions = currentProject.sessions || [];
+    <div class="proj-hero-meta">${currentProject.project?'<span>'+currentProject.project+'</span>':''}${currentProject.constructeur?' · '+currentProject.constructeur:''}</div>
+    <div class="proj-hero-meta" style="margin-top:4px">Aangemaakt: ${currentProject.created}</div>`;
+  const sessions = currentProject.sessions||[];
   const container = document.getElementById('projRASessions');
   const empty = document.getElementById('projEmptyState');
-  if (!sessions.length) {
-    container.innerHTML = '';
-    empty.style.display = '';
-    return;
-  }
-  empty.style.display = 'none';
-  container.innerHTML = sessions.map((s, i) => `
-    <div class="ra-session-card" onclick="openSession('${s.id}')">
+  if(!sessions.length){ container.innerHTML=''; empty.style.display=''; return; }
+  empty.style.display='none';
+  container.innerHTML = sessions.map((s,i)=>`
+    <div class="ra-session-card">
       <div class="ra-session-icon">📋</div>
       <div class="ra-session-info">
-        <div class="ra-session-name">${s.zone || 'RA ' + (i + 1)}</div>
-        <div class="ra-session-meta">${s.date} · ${s.count} risico's · ${s.high ? s.high + ' hoog' : 'ok'}</div>
+        <div class="ra-session-name">${s.zone||'RA '+(i+1)}</div>
+        <div class="ra-session-meta">${s.date} · ${s.count} risico's${s.high?' · '+s.high+' hoog':''}</div>
       </div>
       <span class="ra-session-arrow">›</span>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
-function startNewRAForProject() {
-  if (!currentProject) return;
+function startNewRAForProject(){
+  if(!currentProject) return;
   prepareNewRA(currentProject);
   showScreen('s-new-ra');
 }
 
-function prepareNewRA(project) {
-  if (project) {
-    document.getElementById('klant').value = project.klant;
-    document.getElementById('project').value = project.project || '';
-    document.getElementById('constructeur').value = project.constructeur || '';
-    document.getElementById('newRATitle').textContent = project.klant + ' — RA';
-    cfgChange();
-  } else {
-    document.getElementById('klant').value = '';
-    document.getElementById('project').value = '';
-    document.getElementById('constructeur').value = '';
-    document.getElementById('newRATitle').textContent = 'Snelle RA';
-    cfgChange();
-  }
-  document.getElementById('zone').value = '';
-  document.getElementById('ctx').value = '';
-  document.getElementById('extra').value = '';
-  document.getElementById('rawIn').value = '';
-  document.getElementById('gevList').innerHTML = '';
-  gevRows = []; gevId = 0; raResults = [];
-  document.getElementById('resultSection').style.display = 'none';
-  document.getElementById('statusBar').style.display = 'none';
-  document.getElementById('genBtn').disabled = false;
-  document.getElementById('genBtn').innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Risicoanalyse genereren`;
+function prepareNewRA(project){
+  document.getElementById('klant').value = project?.klant||'';
+  document.getElementById('project').value = project?.project||'';
+  document.getElementById('constructeur').value = project?.constructeur||'';
+  document.getElementById('newRATitle').textContent = project ? project.klant+' — RA' : 'Snelle RA';
+  document.getElementById('zone').value='';
+  document.getElementById('ctx').value='';
+  document.getElementById('extra').value='';
+  document.getElementById('rawIn').value='';
+  document.getElementById('gevList').innerHTML='';
+  gevRows=[]; gevId=0; raResults=[]; gevFotos={};
+  document.getElementById('resultSection').style.display='none';
+  document.getElementById('statusBar').style.display='none';
+  const btn=document.getElementById('genBtn');
+  btn.disabled=false;
+  btn.innerHTML=`<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Risicoanalyse genereren`;
+  cfgChange();
   addGev();
 }
 
-function openSession(id) {
-  // Load a saved session — future feature, for now just show results
-  alert('Sessie laden komt in de volgende versie.');
+// ── FORM ──
+function tog(id){
+  const b=document.getElementById(id+'Body');
+  const c=document.getElementById(id+'Chev');
+  const hidden=b.style.display==='none';
+  b.style.display=hidden?'':'none';
+  c.classList.toggle('o',hidden);
+}
+function cfgChange(){
+  const k=document.getElementById('klant').value.trim();
+  const t=document.getElementById('cfgTag');
+  t.textContent=k?'✓ ok':'vereist';
+  t.className='ctag'+(k?' ok':'');
 }
 
-// ─── FORM HELPERS ───
-function tog(id) {
-  const b = document.getElementById(id + 'Body');
-  const c = document.getElementById(id + 'Chev');
-  const hidden = b.style.display === 'none';
-  b.style.display = hidden ? '' : 'none';
-  c.classList.toggle('o', hidden);
-}
-
-function cfgChange() {
-  const k = document.getElementById('klant').value.trim();
-  const t = document.getElementById('cfgTag');
-  t.textContent = k ? '✓ ok' : 'vereist';
-  t.className = 'ctag' + (k ? ' ok' : '');
-}
-
-function addGev(d = {}) {
-  const id = ++gevId;
+// ── GEVAAR ITEMS MET FOTO ──
+function addGev(d={}){
+  const id=++gevId;
   gevRows.push(id);
-  const list = document.getElementById('gevList');
-  const div = document.createElement('div');
-  div.className = 'gev-item'; div.id = 'g' + id;
-  div.innerHTML = `
+  gevFotos[id]=[];
+  const list=document.getElementById('gevList');
+  const div=document.createElement('div');
+  div.className='gev-item'; div.id='g'+id;
+  div.innerHTML=`
     <div class="gev-top">
       <span class="gev-nr" id="gn${id}">Gevaar ${gevRows.length}</span>
       <button class="gev-del" onclick="delGev(${id})">×</button>
@@ -604,140 +593,216 @@ function addGev(d = {}) {
       </select></div>
     <div class="field"><label>Scenario</label>
       <input class="gs" value="${esc(d.s||'')}" placeholder="bv. klemgevaar bij onderhoud"></div>
-  `;
+    <div class="field">
+      <label>Foto('s)</label>
+      <div class="foto-upload-zone" onclick="document.getElementById('fi${id}').click()">
+        <div class="foto-upload-icon">📷</div>
+        <div class="foto-upload-text">
+          <strong>Foto toevoegen</strong>
+          Boomerang-foto of terreinopname
+        </div>
+        <input type="file" id="fi${id}" accept="image/*" multiple style="display:none" onchange="handleFoto(${id}, this)">
+      </div>
+      <div class="foto-preview-row" id="fp${id}"></div>
+    </div>`;
   list.appendChild(div);
   renum();
 }
 
-function delGev(id) {
-  gevRows = gevRows.filter(x => x !== id);
-  document.getElementById('g' + id)?.remove();
+function handleFoto(gevId, input){
+  const files = Array.from(input.files);
+  files.forEach(file=>{
+    const reader = new FileReader();
+    reader.onload = e=>{
+      gevFotos[gevId].push(e.target.result);
+      renderFotoPreviews(gevId);
+    };
+    reader.readAsDataURL(file);
+  });
+  input.value='';
+}
+
+function renderFotoPreviews(gevId){
+  const row = document.getElementById('fp'+gevId);
+  if(!row) return;
+  row.innerHTML = gevFotos[gevId].map((b64,i)=>`
+    <div class="foto-thumb-wrap">
+      <img class="foto-thumb" src="${b64}" onclick="openLightbox('${b64}')" alt="foto ${i+1}">
+      <button class="foto-thumb-del" onclick="delFoto(${gevId},${i})">×</button>
+    </div>`).join('');
+}
+
+function delFoto(gevId, idx){
+  gevFotos[gevId].splice(idx,1);
+  renderFotoPreviews(gevId);
+}
+
+function openLightbox(src){
+  document.getElementById('lightboxImg').src=src;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('open');
+  document.getElementById('lightboxImg').src='';
+}
+
+function delGev(id){
+  gevRows=gevRows.filter(x=>x!==id);
+  delete gevFotos[id];
+  document.getElementById('g'+id)?.remove();
   renum();
 }
-
-function renum() {
-  document.getElementById('gevTag').textContent = gevRows.length + (gevRows.length === 1 ? ' item' : ' items');
-  gevRows.forEach((id, i) => { const n = document.getElementById('gn' + id); if (n) n.textContent = 'Gevaar ' + (i + 1); });
+function renum(){
+  document.getElementById('gevTag').textContent=gevRows.length+(gevRows.length===1?' item':' items');
+  gevRows.forEach((id,i)=>{const n=document.getElementById('gn'+id);if(n)n.textContent='Gevaar '+(i+1);});
 }
-
-function gevData() {
-  return gevRows.map(id => ({
-    l: document.querySelector('#g' + id + ' .gl')?.value || '',
-    t: document.querySelector('#g' + id + ' .gt')?.value || '',
-    s: document.querySelector('#g' + id + ' .gs')?.value || ''
-  })).filter(g => g.l || g.s);
+function gevData(){
+  return gevRows.map(id=>({
+    l:document.querySelector('#g'+id+' .gl')?.value||'',
+    t:document.querySelector('#g'+id+' .gt')?.value||'',
+    s:document.querySelector('#g'+id+' .gs')?.value||'',
+    fotos:gevFotos[id]||[]
+  })).filter(g=>g.l||g.s);
 }
+function s(v,o){return v===o?'selected':'';}
+function esc(v){return String(v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 
-function s(v, o) { return v === o ? 'selected' : ''; }
-function esc(v) { return String(v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-
-function showStatus(msg, type = 'info') {
-  const b = document.getElementById('statusBar');
-  b.style.display = 'flex'; b.className = 'status ' + type;
-  b.innerHTML = `<span class="sdot"></span><span>${msg}</span>`;
+function showStatus(msg,type='info'){
+  const b=document.getElementById('statusBar');
+  b.style.display='flex'; b.className='status '+type;
+  b.innerHTML=`<span class="sdot"></span><span>${msg}</span>`;
 }
+function sc(r){if(r>=200)return'h';if(r>=90)return'm';if(r>=20)return'l';return'a';}
 
-function sc(r) { if(r>=200)return'h'; if(r>=90)return'm'; if(r>=20)return'l'; return'a'; }
+// ── GENEREER ──
+async function generateRA(){
+  const klant=document.getElementById('klant').value.trim();
+  const project=document.getElementById('project').value.trim();
+  const zone=document.getElementById('zone').value.trim();
+  const constructeur=document.getElementById('constructeur').value.trim();
+  const ctx=document.getElementById('ctx').value.trim();
+  const extra=document.getElementById('extra').value.trim();
+  const raw=document.getElementById('rawIn').value.trim();
+  if(!klant){showStatus('Vul minstens een klantnaam in.','err');return;}
+  const gevaren=gevData();
+  if(!gevaren.length&&!raw){showStatus('Voeg minstens één gevaar toe of plak ruwe input.','err');return;}
 
-// ─── GENERATE ───
-async function generateRA() {
-  const klant = document.getElementById('klant').value.trim();
-  const project = document.getElementById('project').value.trim();
-  const zone = document.getElementById('zone').value.trim();
-  const constructeur = document.getElementById('constructeur').value.trim();
-  const ctx = document.getElementById('ctx').value.trim();
-  const extra = document.getElementById('extra').value.trim();
-  const raw = document.getElementById('rawIn').value.trim();
-  if (!klant) { showStatus('Vul minstens een klantnaam in.', 'err'); return; }
-  const gevaren = gevData();
-  if (!gevaren.length && !raw) { showStatus('Voeg minstens één gevaar toe of plak ruwe input.', 'err'); return; }
+  const btn=document.getElementById('genBtn');
+  btn.disabled=true;
+  btn.innerHTML='<span class="spinner"></span>Analyseren...';
+  document.getElementById('resultSection').style.display='none';
+  showStatus('Claude analyseert conform ISO 12100...','info');
 
-  const btn = document.getElementById('genBtn');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span>Analyseren...';
-  document.getElementById('resultSection').style.display = 'none';
-  showStatus('Claude analyseert conform ISO 12100...', 'info');
+  const gevText=gevaren.map((g,i)=>`${i+1}. Locatie: ${g.l} | Gevaartype: ${g.t} | Scenario: ${g.s}${g.fotos.length?' | '+g.fotos.length+' foto(s) bijgevoegd':''}`).join('\n');
 
-  const gevText = gevaren.map((g, i) => `${i+1}. Locatie: ${g.l} | Gevaartype: ${g.t} | Scenario: ${g.s}`).join('\n');
+  // Verzamel max 3 fotos als base64 voor de API (grootte beperken)
+  const allFotos = gevaren.flatMap(g=>g.fotos).slice(0,3);
 
-  const sys = `Je bent Pieter Fiers, machineveiligheidsexpert bij SPARQ Engineering Kortrijk. Je stelt risicoanalyses op conform EN ISO 12100:2010 met de E × B × W methode.
+  const sys=`Je bent Pieter Fiers, machineveiligheidsexpert bij SPARQ Engineering Kortrijk. Je stelt risicoanalyses op conform EN ISO 12100:2010 met de E × B × W methode.
 Ernst (E): 1=Gering(EHBO), 3=Belangrijk(verzuim), 7=Ernstig(blijvend letsel), 15=Zeer ernstig(1 dode), 40=Ramp, 100=Catastrofaal
 Blootstelling (B): 0.5=Zeer zelden, 1=Zelden(jaarlijks), 2=Soms(maandelijks), 3=Af en toe(wekelijks), 6=Regelmatig(dagelijks), 10=Voortdurend
 Waarschijnlijkheid (W): 0.1=Bijna niet denkbaar, 0.2=Praktisch onmogelijk, 0.5=Denkbaar onwaarschijnlijk, 1=Onwaarschijnlijk mogelijk, 3=Ongewoon mogelijk, 6=Best mogelijk, 10=Te verwachten
 R = E × B × W. Drietraps risicoreductie. PLr via EN ISO 13849-1 Annex A. Normen: EN ISO 12100, EN 620, EN ISO 13857, EN ISO 14122, EN 60204-1, EN ISO 13849-1, EN ISO 13850, EN 617, EN 619.
-Geef ALLEEN een JSON-array, geen uitleg, geen markdown. Formaat:
-[{"nr":1,"norm":"EN ISO 12100; EN 620","locatie":"...","scenario":"Mechanische gevaren — Klemgevaar bij ...","gebruiksfase":"Onderhoudspersoneel, operator","consequenties":"...","E":7,"B":3,"W":1,"R":21,"maatregel":"...","E2":7,"B2":3,"W2":0.1,"R2":2.1,"verantwoordelijke":"${constructeur||'Constructeur'}","restrisico":"Nee","PLr":"Nvt","parametersPLr":""}]`;
+Geef ALLEEN een JSON-array, geen uitleg, geen markdown.
+Formaat: [{"nr":1,"norm":"EN ISO 12100; EN 620","locatie":"...","scenario":"Mechanische gevaren — Klemgevaar bij ...","gebruiksfase":"Onderhoudspersoneel, operator","consequenties":"...","E":7,"B":3,"W":1,"R":21,"maatregel":"...","E2":7,"B2":3,"W2":0.1,"R2":2.1,"verantwoordelijke":"${constructeur||'Constructeur'}","restrisico":"Nee","PLr":"Nvt","parametersPLr":""}]`;
 
-  const usr = `Klant: ${klant}\nProject: ${project}\nZone: ${zone}\nConstructeur: ${constructeur}\nContext: ${ctx}\n${extra?'Aandachtspunten: '+extra:''}\n${gevText?'\nGEVAREN:\n'+gevText:''}\n${raw?'\nRUWE VELDINPUT:\n'+raw:''}`;
-
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 8000, system: sys, messages: [{ role: 'user', content: usr }] })
+  // Bouw de user-message content array (tekst + eventuele fotos)
+  const contentParts = [];
+  if(allFotos.length){
+    allFotos.forEach(b64=>{
+      const [header, data] = b64.split(',');
+      const mt = header.match(/:(.*?);/)?.[1]||'image/jpeg';
+      contentParts.push({type:'image',source:{type:'base64',media_type:mt,data}});
     });
-    const data = await res.json();
-    if (data.error) throw new Error(data.error.message);
-    const txt = data.content.find(b => b.type === 'text')?.text || '[]';
-    raResults = JSON.parse(txt.replace(/```json|```/g, '').trim());
+  }
+  contentParts.push({type:'text',text:`Klant: ${klant}\nProject: ${project}\nZone: ${zone}\nConstructeur: ${constructeur}\nContext: ${ctx}\n${extra?'Aandachtspunten: '+extra:''}\n${gevText?'\nGEVAREN:\n'+gevText:''}\n${raw?'\nRUWE VELDINPUT:\n'+raw:''}`});
+
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:8000,system:sys,messages:[{role:'user',content:contentParts}]})
+    });
+    const data=await res.json();
+    if(data.error) throw new Error(data.error.message);
+    const txt=data.content.find(b=>b.type==='text')?.text||'[]';
+    raResults=JSON.parse(txt.replace(/```json|```/g,'').trim());
+
+    // Koppel fotos aan resultaten op basis van volgorde gevaren
+    gevaren.forEach((g,i)=>{ if(raResults[i]) raResults[i]._fotos=g.fotos; });
+
     renderCards(raResults);
-    saveSession(raResults, { klant, project, zone, constructeur });
-    showStatus(`✓ ${raResults.length} risico-items — ${klant}${zone ? ' · ' + zone : ''}`, 'ok');
-    setTimeout(() => document.getElementById('resultSection')?.scrollIntoView({ behavior: 'smooth' }), 150);
-  } catch (e) {
-    showStatus('Fout: ' + e.message, 'err');
-  } finally {
-    btn.disabled = false;
-    btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Opnieuw genereren`;
+    saveSession(raResults,{klant,project,zone,constructeur});
+    showStatus(`✓ ${raResults.length} risico-items — ${klant}${zone?' · '+zone:''}. Scores zijn bewerkbaar.`,'ok');
+    setTimeout(()=>document.getElementById('resultSection')?.scrollIntoView({behavior:'smooth'}),150);
+  }catch(e){
+    showStatus('Fout: '+e.message,'err');
+  }finally{
+    btn.disabled=false;
+    btn.innerHTML=`<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Opnieuw genereren`;
   }
 }
 
-function saveSession(results, meta) {
-  if (!currentProject) return;
-  const high = results.filter(r => sc(r.R) === 'h').length;
-  const session = {
-    id: 's' + Date.now(),
-    zone: meta.zone || 'RA ' + (currentProject.sessions.length + 1),
-    date: new Date().toLocaleDateString('nl-BE'),
-    count: results.length,
-    high,
-    results
-  };
-  currentProject.sessions.unshift(session);
+function saveSession(results,meta){
+  if(!currentProject) return;
+  const high=results.filter(r=>sc(r.R)==='h').length;
+  currentProject.sessions.unshift({id:'s'+Date.now(),zone:meta.zone||'RA '+(currentProject.sessions.length+1),date:new Date().toLocaleDateString('nl-BE'),count:results.length,high,results});
   saveProjects();
 }
 
-function renderCards(rows) {
-  const container = document.getElementById('resultCards');
-  container.innerHTML = '';
+// ── RENDER RESULTAATKAARTEN MET BEWERKBARE SCORES ──
+function renderCards(rows){
+  const container=document.getElementById('resultCards');
+  container.innerHTML='';
   let h=0,m=0,l=0,a=0;
-  rows.forEach(r => {
-    const R = +(r.R || (r.E*r.B*r.W)).toFixed(1);
-    const R2 = +(r.R2 || (r.E2*r.B2*r.W2)).toFixed(1);
-    const cls = sc(R);
+
+  rows.forEach((r,idx)=>{
+    const R=+(r.R||(r.E*r.B*r.W)).toFixed(1);
+    const R2=+(r.R2||(r.E2*r.B2*r.W2)).toFixed(1);
+    const cls=sc(R);
     if(cls==='h')h++;else if(cls==='m')m++;else if(cls==='l')l++;else a++;
-    const norms = String(r.norm||'').split(/[;,]/).map(n=>`<span class="tag n">${n.trim()}</span>`).join('');
-    const fase = r.gebruiksfase ? `<span class="tag">${r.gebruiksfase}</span>` : '';
-    const plrHtml = r.PLr && r.PLr!=='Nvt' ? `<div class="sl">PLr vereist</div><div><span class="plr-tag">${r.PLr}</span>${r.parametersPLr?` <span style="font-size:11px;color:var(--ink3);font-family:var(--mono)">${r.parametersPLr}</span>`:''}</div>` : '';
-    const rr = String(r.restrisico||'Nee').toLowerCase();
-    const card = document.createElement('div');
-    card.className = 'ra-card';
-    card.innerHTML = `
+
+    const norms=String(r.norm||'').split(/[;,]/).map(n=>`<span class="tag n">${n.trim()}</span>`).join('');
+    const fase=r.gebruiksfase?`<span class="tag">${r.gebruiksfase}</span>`:'';
+    const plrHtml=r.PLr&&r.PLr!=='Nvt'?`<div class="sl">PLr vereist</div><div><span class="plr-tag">${r.PLr}</span>${r.parametersPLr?` <span style="font-size:11px;color:var(--ink3);font-family:var(--mono)">${r.parametersPLr}</span>`:''}</div>`:'';
+    const rr=String(r.restrisico||'Nee').toLowerCase();
+
+    // Fotos
+    const fotos=(r._fotos||[]);
+    const fotoHtml=fotos.length?`<div class="sl">Foto's</div><div class="foto-result-row">${fotos.map(b64=>`<img class="foto-result-img" src="${b64}" onclick="openLightbox('${b64}')" alt="foto">`).join('')}</div>`:'';
+
+    const card=document.createElement('div');
+    card.className='ra-card';
+    card.id='rc'+idx;
+    card.innerHTML=`
       <div class="ra-top">
         <span class="ra-nr">#${r.nr}</span>
         <div class="ra-loc">${r.locatie||''}</div>
-        <span class="ra-rbadge ${cls}">R=${R}</span>
+        <span class="ra-rbadge ${cls}" id="rbadge${idx}">R=${R}</span>
       </div>
       <div class="ra-body">
         <div class="ra-tags">${norms}${fase}</div>
         <div class="sl">Scenario</div><div class="ra-text">${r.scenario||''}</div>
         <div class="sl">Consequenties</div><div class="ra-text">${r.consequenties||''}</div>
-        <div class="sl">Scores voor</div>
-        <div class="scores">
-          <div class="sb"><div class="v">${r.E}</div><div class="l">Ernst</div></div>
-          <div class="sb"><div class="v">${r.B}</div><div class="l">Blootst.</div></div>
-          <div class="sb"><div class="v">${r.W}</div><div class="l">Waarsch.</div></div>
-          <div class="sb" style="background:#fde8e8"><div class="v" style="color:#b91c1c">${R}</div><div class="l">R voor</div></div>
+        ${fotoHtml}
+        <div class="sl">Scores voor maatregel <span style="font-size:9px;color:var(--accent);font-weight:400">(aanpasbaar)</span></div>
+        <div class="scores-edit" id="scores-voor-${idx}">
+          <div class="score-edit-box">
+            <input type="number" value="${r.E}" min="1" max="100" step="1" oninput="herbereken(${idx},'voor')" id="e-v-${idx}">
+            <span class="sl2">Ernst</span>
+          </div>
+          <div class="score-edit-box">
+            <input type="number" value="${r.B}" min="0.5" max="10" step="0.5" oninput="herbereken(${idx},'voor')" id="b-v-${idx}">
+            <span class="sl2">Blootst.</span>
+          </div>
+          <div class="score-edit-box">
+            <input type="number" value="${r.W}" min="0.1" max="10" step="0.1" oninput="herbereken(${idx},'voor')" id="w-v-${idx}">
+            <span class="sl2">Waarsch.</span>
+          </div>
+          <div class="score-edit-box r-box">
+            <span class="r-display" id="r-v-${idx}">${R}</span>
+            <span class="sl2">R voor</span>
+          </div>
         </div>
       </div>
       <button class="exp-btn" onclick="toggleExp(this)">
@@ -746,12 +811,24 @@ function renderCards(rows) {
       </button>
       <div class="exp-content">
         <div class="sl">Maatregel</div><div class="ra-text">${r.maatregel||''}</div>
-        <div class="sl" style="margin-top:11px">Scores na</div>
-        <div class="scores after">
-          <div class="sb"><div class="v">${r.E2}</div><div class="l">Ernst</div></div>
-          <div class="sb"><div class="v">${r.B2}</div><div class="l">Blootst.</div></div>
-          <div class="sb"><div class="v">${r.W2}</div><div class="l">Waarsch.</div></div>
-          <div class="sb"><div class="v">${R2}</div><div class="l">R na</div></div>
+        <div class="sl" style="margin-top:11px">Scores na maatregel <span style="font-size:9px;color:var(--ok);font-weight:400">(aanpasbaar)</span></div>
+        <div class="scores-edit after">
+          <div class="score-edit-box">
+            <input type="number" value="${r.E2}" min="1" max="100" step="1" oninput="herbereken(${idx},'na')" id="e-n-${idx}">
+            <span class="sl2">Ernst</span>
+          </div>
+          <div class="score-edit-box">
+            <input type="number" value="${r.B2}" min="0.5" max="10" step="0.5" oninput="herbereken(${idx},'na')" id="b-n-${idx}">
+            <span class="sl2">Blootst.</span>
+          </div>
+          <div class="score-edit-box">
+            <input type="number" value="${r.W2}" min="0.1" max="10" step="0.1" oninput="herbereken(${idx},'na')" id="w-n-${idx}">
+            <span class="sl2">Waarsch.</span>
+          </div>
+          <div class="score-edit-box r-box" style="background:var(--ok-s);border-color:#6ee7b7">
+            <span class="r-display" style="color:#065f46" id="r-n-${idx}">${R2}</span>
+            <span class="sl2">R na</span>
+          </div>
         </div>
         <div class="sl" style="margin-top:11px">Verantwoordelijke</div><div class="ra-text">${r.verantwoordelijke||''}</div>
         <div class="sl" style="margin-top:11px">Restrisico</div>
@@ -761,60 +838,77 @@ function renderCards(rows) {
     `;
     container.appendChild(card);
   });
-  const pills = document.getElementById('resultPills');
-  pills.innerHTML = [
+
+  const pills=document.getElementById('resultPills');
+  pills.innerHTML=[
     h?`<span class="pill h">Hoog: ${h}</span>`:'',
     m?`<span class="pill m">Belang.: ${m}</span>`:'',
     l?`<span class="pill l">Mog.: ${l}</span>`:'',
     a?`<span class="pill a">Aanv.: ${a}</span>`:''
   ].filter(Boolean).join('');
-  document.getElementById('resultTitle').textContent = rows.length + ' risico-items';
-  document.getElementById('resultSection').style.display = '';
+  document.getElementById('resultTitle').textContent=rows.length+' risico-items';
+  document.getElementById('resultSection').style.display='';
 }
 
-function toggleExp(btn) {
-  const c = btn.nextElementSibling;
-  const open = c.classList.toggle('open');
-  btn.innerHTML = open
-    ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>Inklappen'
-    : '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>Maatregel &amp; reductie';
+// ── SCORE HERBEREKENING ──
+function herbereken(idx, fase){
+  if(fase==='voor'){
+    const E=parseFloat(document.getElementById('e-v-'+idx)?.value)||0;
+    const B=parseFloat(document.getElementById('b-v-'+idx)?.value)||0;
+    const W=parseFloat(document.getElementById('w-v-'+idx)?.value)||0;
+    const R=+(E*B*W).toFixed(1);
+    document.getElementById('r-v-'+idx).textContent=R;
+    // update badge
+    const badge=document.getElementById('rbadge'+idx);
+    if(badge){ badge.textContent='R='+R; badge.className='ra-rbadge '+sc(R); }
+    // update in raResults
+    if(raResults[idx]){ raResults[idx].E=E; raResults[idx].B=B; raResults[idx].W=W; raResults[idx].R=R; }
+  } else {
+    const E2=parseFloat(document.getElementById('e-n-'+idx)?.value)||0;
+    const B2=parseFloat(document.getElementById('b-n-'+idx)?.value)||0;
+    const W2=parseFloat(document.getElementById('w-n-'+idx)?.value)||0;
+    const R2=+(E2*B2*W2).toFixed(1);
+    document.getElementById('r-n-'+idx).textContent=R2;
+    if(raResults[idx]){ raResults[idx].E2=E2; raResults[idx].B2=B2; raResults[idx].W2=W2; raResults[idx].R2=R2; }
+  }
 }
 
-function copyTSV() {
-  if (!raResults.length) return;
-  const h = ['Nr','Norm','Datum','Locatie','Scenario','Gebruiksfase','Consequenties','E','B','W','R','Maatregel','E2','B2','W2','R2','Verantwoordelijke','Restrisico','PLr','Parameters PLr'];
-  const d = new Date().toLocaleDateString('nl-BE');
-  const rows = raResults.map(r => [r.nr,r.norm,d,r.locatie,r.scenario,r.gebruiksfase,r.consequenties,r.E,r.B,r.W,r.R,r.maatregel,r.E2,r.B2,r.W2,r.R2,r.verantwoordelijke,r.restrisico,r.PLr,r.parametersPLr||''].map(v=>String(v||'').replace(/\t/g,' ')).join('\t'));
-  navigator.clipboard.writeText([h.join('\t'),...rows].join('\n')).then(() => showStatus('✓ Gekopieerd — plak in Excel via Ctrl+V / Plakken', 'ok'));
+function toggleExp(btn){
+  const c=btn.nextElementSibling;
+  const open=c.classList.toggle('open');
+  btn.innerHTML=open
+    ?'<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>Inklappen'
+    :'<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>Maatregel &amp; reductie';
 }
 
-function dlCSV() {
-  if (!raResults.length) return;
-  const klant = document.getElementById('klant').value.trim() || 'RA';
-  const zone = document.getElementById('zone').value.trim() || 'export';
-  const h = ['Nr','Norm','Datum','Locatie','Scenario','Gebruiksfase','Consequenties','E','B','W','R','Maatregel','E2','B2','W2','R2','Verantwoordelijke','Restrisico','PLr','Parameters PLr'];
-  const d = new Date().toLocaleDateString('nl-BE');
-  const rows = raResults.map(r => [r.nr,r.norm,d,r.locatie,r.scenario,r.gebruiksfase,r.consequenties,r.E,r.B,r.W,r.R,r.maatregel,r.E2,r.B2,r.W2,r.R2,r.verantwoordelijke,r.restrisico,r.PLr,r.parametersPLr||''].map(v=>'"'+String(v||'').replace(/"/g,'""')+'"').join(';'));
-  const csv = '\uFEFF' + [h.join(';'),...rows].join('\r\n');
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));
-  a.download = `RA_${klant.replace(/\s+/g,'_')}_${zone.replace(/\s+/g,'_')}.csv`;
+function copyTSV(){
+  if(!raResults.length) return;
+  const h=['Nr','Norm','Datum','Locatie','Scenario','Gebruiksfase','Consequenties','E','B','W','R','Maatregel','E2','B2','W2','R2','Verantwoordelijke','Restrisico','PLr','Parameters PLr'];
+  const d=new Date().toLocaleDateString('nl-BE');
+  const rows=raResults.map(r=>[r.nr,r.norm,d,r.locatie,r.scenario,r.gebruiksfase,r.consequenties,r.E,r.B,r.W,r.R,r.maatregel,r.E2,r.B2,r.W2,r.R2,r.verantwoordelijke,r.restrisico,r.PLr,r.parametersPLr||''].map(v=>String(v||'').replace(/\t/g,' ')).join('\t'));
+  navigator.clipboard.writeText([h.join('\t'),...rows].join('\n')).then(()=>showStatus('✓ Gekopieerd — plak in Excel via Plakken','ok'));
+}
+
+function dlCSV(){
+  if(!raResults.length) return;
+  const klant=document.getElementById('klant').value.trim()||'RA';
+  const zone=document.getElementById('zone').value.trim()||'export';
+  const h=['Nr','Norm','Datum','Locatie','Scenario','Gebruiksfase','Consequenties','E','B','W','R','Maatregel','E2','B2','W2','R2','Verantwoordelijke','Restrisico','PLr','Parameters PLr'];
+  const d=new Date().toLocaleDateString('nl-BE');
+  const rows=raResults.map(r=>[r.nr,r.norm,d,r.locatie,r.scenario,r.gebruiksfase,r.consequenties,r.E,r.B,r.W,r.R,r.maatregel,r.E2,r.B2,r.W2,r.R2,r.verantwoordelijke,r.restrisico,r.PLr,r.parametersPLr||''].map(v=>'"'+String(v||'').replace(/"/g,'""')+'"').join(';'));
+  const csv='\uFEFF'+[h.join(';'),...rows].join('\r\n');
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));
+  a.download=`RA_${klant.replace(/\s+/g,'_')}_${zone.replace(/\s+/g,'_')}.csv`;
   a.click();
-  showStatus('✓ CSV gedownload', 'ok');
+  showStatus('✓ CSV gedownload','ok');
 }
 
-// ─── INIT ───
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js').catch(() => {});
+// ── INIT ──
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('/ra-gen/sw.js').catch(()=>{});
 }
 renderHome();
-addGev();
-
-// Quick tile active state
-document.querySelectorAll('.quick-tile').forEach(t => {
-  t.addEventListener('touchstart', () => t.style.background = '#f0f4ff', {passive:true});
-  t.addEventListener('touchend', () => setTimeout(() => t.style.background = '', 200), {passive:true});
-});
 </script>
 </body>
 </html>
