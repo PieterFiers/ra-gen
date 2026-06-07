@@ -218,6 +218,25 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 .lightbox.open{display:flex}
 .lightbox img{max-width:95vw;max-height:90vh;border-radius:10px;object-fit:contain}
 .lightbox-close{position:absolute;top:16px;right:16px;width:36px;height:36px;background:rgba(255,255,255,.15);border:none;border-radius:50%;color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+
+/* SETTINGS */
+.api-key-box{background:var(--ink);border-radius:var(--r2);padding:16px;margin-bottom:14px}
+.api-key-box .aklabel{font-family:var(--mono);font-size:10px;font-weight:600;color:rgba(255,255,255,.5);letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px}
+.api-key-status{display:flex;align-items:center;gap:8px;margin-top:10px}
+.api-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.api-dot.ok{background:#34d399}
+.api-dot.err{background:#f87171}
+.api-dot-label{font-size:12px;font-family:var(--mono)}
+.api-dot.ok + .api-dot-label{color:#34d399}
+.api-dot.err + .api-dot-label{color:#f87171}
+.apikey-input-wrap{position:relative}
+.apikey-input-wrap input{padding-right:48px;font-family:var(--mono);font-size:13px;letter-spacing:.02em}
+.apikey-toggle{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--ink3);font-size:18px;cursor:pointer;padding:4px;line-height:1}
+.info-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:14px 16px;margin-bottom:12px}
+.info-card h3{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--ink2);letter-spacing:.05em;text-transform:uppercase;margin-bottom:8px}
+.info-card p{font-size:13px;color:var(--ink3);line-height:1.6}
+.info-card a{color:var(--accent);text-decoration:none}
+.info-card code{font-family:var(--mono);font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;color:var(--ink2)}
 </style>
 </head>
 <body>
@@ -227,7 +246,7 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
   <div class="topbar">
     <div class="logo-mark">RA<em>.</em>gen</div>
     <div style="flex:1"></div>
-    <span style="font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.4);letter-spacing:.05em">ISO 12100</span>
+    <button onclick="openSettings()" style="background:none;border:none;color:rgba(255,255,255,.5);font-size:20px;cursor:pointer;padding:4px 6px;line-height:1" title="Instellingen">⚙️</button>
   </div>
   <div class="content">
     <div class="home-hero">
@@ -410,6 +429,45 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
       <button class="btn-secondary" onclick="closeModal()">Annuleren</button>
       <button class="btn-primary" style="box-shadow:none" onclick="createProject()">Aanmaken</button>
     </div>
+  </div>
+</div>
+
+<!-- SETTINGS SCREEN -->
+<div class="screen" id="s-settings">
+  <div class="topbar">
+    <button class="topbar-back" onclick="goBack()">‹</button>
+    <span class="topbar-title">Instellingen</span>
+  </div>
+  <div class="content">
+    <div class="api-key-box">
+      <div class="aklabel">Anthropic API-sleutel</div>
+      <div class="apikey-input-wrap">
+        <input type="password" id="apiKeyInput" placeholder="sk-ant-api03-..." oninput="apiKeyChanged()">
+        <button class="apikey-toggle" onclick="toggleApiKeyVisibility()" id="apiKeyToggle">👁</button>
+      </div>
+      <div class="api-key-status" id="apiKeyStatus">
+        <span class="api-dot err"></span>
+        <span class="api-dot-label">Geen sleutel ingesteld</span>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <h3>Waar haal ik mijn API-sleutel?</h3>
+      <p>Ga naar <a href="https://console.anthropic.com/settings/keys" target="_blank">console.anthropic.com</a> → Settings → API Keys → Create Key.<br><br>
+      De sleutel begint met <code>sk-ant-</code> en wordt veilig opgeslagen op dit toestel. Ze verlaat nooit dit apparaat, gaat rechtstreeks naar Anthropic.</p>
+    </div>
+
+    <div class="info-card">
+      <h3>Privacy & veiligheid</h3>
+      <p>De sleutel wordt opgeslagen in de lokale opslag van je browser (localStorage). Ze staat niet in de code op GitHub en is alleen zichtbaar op dit toestel. Verwijder ze via de knop hieronder als je het toestel doorgeeft.</p>
+    </div>
+
+    <button class="btn-secondary" onclick="clearApiKey()" style="margin-top:4px;color:var(--err);border-color:var(--err)">
+      API-sleutel verwijderen
+    </button>
+  </div>
+  <div class="bottom-bar">
+    <button class="btn-primary" onclick="saveApiKey()">Opslaan & terug</button>
   </div>
 </div>
 
@@ -693,6 +751,14 @@ async function generateRA(){
   document.getElementById('resultSection').style.display='none';
   showStatus('Claude analyseert conform ISO 12100...','info');
 
+  const apiKey = getApiKey();
+  if(!apiKey){
+    showStatus('Geen API-sleutel ingesteld. Tik op ⚙️ rechts bovenaan om je sleutel in te stellen.','err');
+    btn.disabled=false;
+    btn.innerHTML=`<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Risicoanalyse genereren`;
+    return;
+  }
+
   const gevText=gevaren.map((g,i)=>`${i+1}. Locatie: ${g.l} | Gevaartype: ${g.t} | Scenario: ${g.s}${g.fotos.length?' | '+g.fotos.length+' foto(s) bijgevoegd':''}`).join('\n');
 
   // Verzamel max 3 fotos als base64 voor de API (grootte beperken)
@@ -720,7 +786,12 @@ Formaat: [{"nr":1,"norm":"EN ISO 12100; EN 620","locatie":"...","scenario":"Mech
   try{
     const res=await fetch('https://api.anthropic.com/v1/messages',{
       method:'POST',
-      headers:{'Content-Type':'application/json'},
+      headers:{
+        'Content-Type':'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
       body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:8000,system:sys,messages:[{role:'user',content:contentParts}]})
     });
     const data=await res.json();
@@ -904,11 +975,67 @@ function dlCSV(){
   showStatus('✓ CSV gedownload','ok');
 }
 
+// ── INSTELLINGEN ──
+function openSettings(){
+  const stored = localStorage.getItem('ra_apikey')||'';
+  document.getElementById('apiKeyInput').value = stored;
+  updateApiKeyStatusUI(stored);
+  showScreen('s-settings');
+}
+
+function apiKeyChanged(){
+  const v = document.getElementById('apiKeyInput').value.trim();
+  updateApiKeyStatusUI(v);
+}
+
+function updateApiKeyStatusUI(key){
+  const el = document.getElementById('apiKeyStatus');
+  if(!el) return;
+  const ok = key.startsWith('sk-ant-') && key.length > 20;
+  el.innerHTML = ok
+    ? '<span class="api-dot ok"></span><span class="api-dot-label">Sleutel geldig formaat</span>'
+    : '<span class="api-dot err"></span><span class="api-dot-label">Geen geldige sleutel</span>';
+}
+
+function saveApiKey(){
+  const v = document.getElementById('apiKeyInput').value.trim();
+  if(v) localStorage.setItem('ra_apikey', v);
+  goBack();
+}
+
+function clearApiKey(){
+  localStorage.removeItem('ra_apikey');
+  document.getElementById('apiKeyInput').value = '';
+  updateApiKeyStatusUI('');
+  showStatus('API-sleutel verwijderd.','info');
+}
+
+function toggleApiKeyVisibility(){
+  const inp = document.getElementById('apiKeyInput');
+  const btn = document.getElementById('apiKeyToggle');
+  if(inp.type==='password'){ inp.type='text'; btn.textContent='🙈'; }
+  else { inp.type='password'; btn.textContent='👁'; }
+}
+
+function initApiKeyStatus(){
+  // Toon waarschuwing op homescherm als er geen sleutel is
+  const key = localStorage.getItem('ra_apikey')||'';
+  if(!key){
+    const hero = document.querySelector('.home-hero .hero-sub');
+    if(hero) hero.innerHTML = 'Risicoanalyse generator conform<br>EN ISO 12100 · E × B × W methode<br><span style="color:#f87171;font-size:12px;margin-top:6px;display:block">⚙️ Stel eerst je API-sleutel in</span>';
+  }
+}
+
+function getApiKey(){
+  return localStorage.getItem('ra_apikey')||'';
+}
+
 // ── INIT ──
 if('serviceWorker' in navigator){
   navigator.serviceWorker.register('/ra-gen/sw.js').catch(()=>{});
 }
 renderHome();
+initApiKeyStatus();
 </script>
 </body>
 </html>
